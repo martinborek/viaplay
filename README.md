@@ -12,7 +12,7 @@ Default movie entry can be added with `http://localhost/add_default/`
 
 ## Backend
 Backend provides an API that expects input in form of POST and GET requests, responding with JSON objects.
-API consits of:
+API consists of:
 * Adding a movie: `http://localhost/add/`
 * Updating a movie: `http://localhost/update/`
 * Deleting a movie: `http://localhost/delete/`
