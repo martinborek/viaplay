@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Update | Viaplay</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stylesheet.css') }}">
+</head>
+<body>
+    <h1>Update movie</h1>
+    <form method="post" action="{{ url_for('update', frontend='yes')}}">
+        <input type="hidden" name="id" value="{{ movie._id }}">
+        <p>Title: <input type=text name=title value="{{ movie.title }}"></p>
+        <p>Description: <input type=text name=description value="{{ movie.description }}"></p>
+        <p>Production country: <input type=text name=production_country value="{{ movie.production_country }}"></p>
+        <p>Production year: <input type=text name=production_year value="{{ movie.production_year }}"></p>
+        <p>Duration (ms): <input type=text name=duration value="{{ movie.duration }}"></p>
+        <p>Genre: <input type=text name=genre value="{{ movie.genre }}"></p>
+        <p>Actors: <input type=text name=actors value="{{ movie.actors }}"></p>
+        <p>Cover image (url): <input type=text name=cover_image value="{{ movie.cover_image }}"></p>
+        <p>IMDB rating: <input type=text name=imdb_rating value="{{ movie.imdb_rating }}"></p>
+        <p>Audio languages: <input type=text name=audio_languages value="{{ movie.audio_languages }}"></p>
+        <p>Available: <input type=checkbox name=isAvailable value="true"{% if movie.isAvailable %} checked="checked" {% endif %}></p>
+        <input type=submit value="Update movie">
+     </form>
+</body>
+</html>

@@ -1,0 +1,12 @@
+version: '2'
+services:
+    web_viaplay:
+        build: .
+        ports:
+            - "80:5000"
+        depends_on:
+            - db_viaplay
+    db_viaplay:
+        image: mongo:3.4.0
+        ports:
+          - 27017:27017

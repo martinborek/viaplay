@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Viaplay</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stylesheet.css') }}">
+</head>
+<body>
+    <h1>Viaplay movie database</h1>
+    {% if status %}
+            <p class="status">{{ status }}</p>
+    {% endif %}
+    <h2>Movies</h2>
+    {% for entry in movies %}
+    <h3>{{ entry.title }} (<a href="{{ url_for('delete', id=entry._id, frontend="yes") }}">Delete</a> <a href="{{    url_for('update_form', id=entry._id) }}">Update</a>)</h3>
+
+    {% if entry.isAvailable %}
+    <b>Available</b>
+    {% endif %}
+    <p>{{ entry.description }}</p>
+    <p>Duration: {{ entry.duration }}, Production year: {{ entry.production_year }}, Production country: {{ entry.production_country }}, IMDB rating:    {{ entry.imdb_rating }}</p>
+
+    <ul>
+    Actors:
+    {% for actor in entry.actors %}
+        <li>{{ actor }}</li>
+    {% endfor %}
+    </ul>
+
+    <ul>
+    Genre:
+    {% for genre in entry.genre %}
+        <li>{{ genre }}</li>
+    {% endfor %}
+    </ul>
+
+    <ul>
+    Audio languages:
+    {% for language in entry.audio_languages %}
+        <li>{{ language }}</li>
+    {% endfor %}
+    </ul>
+
+    {% if entry.cover_image %}
+        <a href="{{ entry.cover_image }}" target="_blank">Cover image</a>
+    {% endif %}
+
+    {% else %}
+    <h3>No movies in the database</h3>
+    {% endfor %}
+    <br/>
+
+    <h2>Add movie</h2>
+    <form method="post" action="{{ url_for('add', frontend='yes')}}">
+        <p>Title: <input type=text name=title></p>
+        <p>Description: <input type=text name=description></p>
+        <p>Production country: <input type=text name=production_country></p>
+        <p>Production year: <input type=text name=production_year></p>
+        <p>Duration (ms): <input type=text name=duration></p>
+        <p>Genre: <input type=text name=genre></p>
+        <p>Actors: <input type=text name=actors></p>
+        <p>Cover image (url): <input type=text name=cover_image></p>
+        <p>IMDB rating: <input type=text name=imdb_rating></p>
+        <p>Audio languages: <input type=text name=audio_languages></p>
+        <p>Available: <input type=checkbox name=isAvailable value="true"></p>
+        <input type=submit value="Add movie">
+     </form>
+</body>
+</html>
